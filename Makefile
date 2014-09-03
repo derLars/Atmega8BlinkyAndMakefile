@@ -18,7 +18,7 @@ OUTPUTNAME=ledblinker
 OUTPUTFORMAT=ihex
 
 #all the project files
-#REPLACE THIS FILES WITH YOUR PROJECT FILES!!!!
+#REPLACE THESE FILES WITH YOUR PROJECT FILES!!!!
 PRJSRC=main.c ledBlink.c 
 
 #project files as .o files
