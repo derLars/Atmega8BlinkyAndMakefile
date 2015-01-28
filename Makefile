@@ -19,7 +19,7 @@ OUTPUTFORMAT=ihex
 
 #all the project files
 #REPLACE THESE FILES WITH YOUR PROJECT FILES!!!!
-PRJSRC=main.c ledBlink.c 
+PRJSRC=main.c ledBlink.c
 
 #project files as .o files
 OBJECTS= $(PRJSRC:.c=.o)
@@ -27,8 +27,8 @@ OBJECTS= $(PRJSRC:.c=.o)
 #additional includes
 INCLUDES=
 LIBRARIES=
-#optimization level between (s0 (zero) and s3 (maximum))
-OPTIMIZE=s
+#optimization level between (0 (zero) and 3 (maximum))
+OPTIMIZE=0
 
 #the Programmer
 PROGRAMMER=avrispmkII
@@ -41,8 +41,8 @@ CFLAGS= -mmcu=$(MCU) -O$(OPTIMIZE)
 LDFLAGS= 
 
 #executables
-CC=/opt/AVR/avr-gnu-toolchain/bin/avr-gcc
-OBJCOPY=/opt/AVR/avr-gnu-toolchain/bin/avr-objcopy
+CC=/opt/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc
+OBJCOPY=/opt/avr8-gnu-toolchain-linux_x86_64/bin/avr-objcopy
 AVRDUDE=avrdude
 
 all: $(OUTPUTNAME).hex clean flash
@@ -62,6 +62,10 @@ $(OUTPUTNAME).elf: $(OBJECTS)
 #flash the µC
 flash:
 	sudo $(AVRDUDE) -F -V -c $(PROGRAMMER) -p ATmega8 -P $(CONNECTION) -U flash:w:$(OUTPUTNAME).hex
+
+#set internal 8MHZ
+fuse:
+	sudo $(AVRDUDE) -c $(PROGRAMMER) -p ATmega8 -U lfuse:w:0xc4:m -U hfuse:w:0xd9:m 
 
 clean:
 	rm -f *.o
