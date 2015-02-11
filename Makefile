@@ -19,7 +19,7 @@ OUTPUTFORMAT=ihex
 
 #all the project files
 #REPLACE THESE FILES WITH YOUR PROJECT FILES!!!!
-PRJSRC=main.c ledBlink.c
+PRJSRC=main.c
 
 #project files as .o files
 OBJECTS= $(PRJSRC:.c=.o)
@@ -64,9 +64,21 @@ flash:
 	sudo $(AVRDUDE) -F -V -c $(PROGRAMMER) -p ATmega8 -P $(CONNECTION) -U flash:w:$(OUTPUTNAME).hex
 
 #set internal 8MHZ
-fuse:
-	sudo $(AVRDUDE) -c $(PROGRAMMER) -p ATmega8 -U lfuse:w:0xc4:m -U hfuse:w:0xd9:m 
+fuse8:
+	sudo $(AVRDUDE) -c $(PROGRAMMER) -p ATmega8 -U lfuse:w:0xe4:m -U hfuse:w:0xd9:m 
+
+#set internal 4MHZ
+fuse4:
+	sudo $(AVRDUDE) -c $(PROGRAMMER) -p ATmega8 -U lfuse:w:0xe3:m -U hfuse:w:0xd9:m 
+
+#set internal 2MHZ
+fuse2:
+	sudo $(AVRDUDE) -c $(PROGRAMMER) -p ATmega8 -U lfuse:w:0xe2:m -U hfuse:w:0xd9:m 
+
+#set internal 1MHZ
+fuse1:
+	sudo $(AVRDUDE) -c $(PROGRAMMER) -p ATmega8 -U lfuse:w:0xe1:m -U hfuse:w:0xd9:m 
 
 clean:
-	rm -f *.o
+	rm -f $(OBJECTS)	
 	rm -f *.elf
