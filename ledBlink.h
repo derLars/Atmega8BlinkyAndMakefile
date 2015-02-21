@@ -15,9 +15,16 @@
 #define F_CPU 1000000UL
 #endif
 
+#include <stdint.h>
+
 /******
 public functions
 ******/
 void initGPIO(void);
-void setPORT(void);
-void clearPORT(void);
+
+void setControlLED(void);
+void revokeControlLED(void);
+
+void setPin(uint8_t pin);
+
+void wait_us(uint8_t us);

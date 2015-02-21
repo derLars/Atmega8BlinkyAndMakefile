@@ -1,16 +1,19 @@
-#include "ledBlink.h"
 #include <util/delay.h>
+#include <avr/io.h>
 
 int main(void)
 {
-	initGPIO();
+	DDRB = 0xff;
+	PORTB = 0x00;
 
+	int i;
 	while(1)
-	{
-		setPORT();
-		_delay_ms(500);
-		clearPORT();
-		_delay_ms(500);
+	{		
+		for(i=0; i<16;i++)
+		{
+			PORTB = i;
+			_delay_ms(1000);
+		}		
 	}
 	
 	return 0;

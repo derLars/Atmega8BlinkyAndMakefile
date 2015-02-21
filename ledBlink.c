@@ -16,16 +16,32 @@
 
 void initGPIO(void)
 {
-	DDRC = 0xff;
+	DDRC |= (1<<PC5);
+	DDRB |= (1<<PB0) | (1<<PB1);
 	PORTC = 0x00;
 }
 
-void setPORT(void)
+void setControlLED(void)
 {
-	PORTC = 0xff;
+	PORTC |= (1<<PC5);
+}
+void revokeControlLED(void)
+{
+	PORTC &= ~(1<<PC5);
 }
 
-void clearPORT(void)
+void setPin(uint8_t pin)
+{	
+	PORTB = (1<<pin);
+}
+
+
+void wait_us(uint8_t us)
 {
-	PORTC = 0x00;
+	uint8_t i;
+	
+	for(i=0;i<us;i++)
+	{
+		
+	}	
 }
